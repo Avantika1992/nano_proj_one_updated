@@ -13,6 +13,8 @@ class BooksApp extends React.Component {
       "read": this.props.read
     }
     return (
+      <div>
+      <Link to="/search"><h2>GO TO SEARCH PAGE</h2></Link>
       <div className="app">
         <div>
           <div>
@@ -20,7 +22,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             {Object.keys(allBooks).map(key => (
-              <div>
+              <div key={key}>
                 <h2 className="bookshelf-title">{key}</h2>
                 {allBooks[key].map(book => (
                 <div key={book.id} className="bookshelf"><div className="bookshelf-books">
@@ -52,6 +54,7 @@ class BooksApp extends React.Component {
           </div>
         </div>
       </div>
+     </div>
     )
   }
 }
