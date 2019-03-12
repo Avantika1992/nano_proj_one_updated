@@ -30,7 +30,15 @@ class Search extends React.Component {
  }
 }
 render(){
+  var array2=this.props.currentlyReading.concat(this.props.wantToRead)
+  array2=array2.concat(this.props.read)
+  console.log(array2)
   let totalBooks = this.state.displaySearch
+  console.log(totalBooks)
+  totalBooks = totalBooks.filter(function(item) {
+  return array2.indexOf(item) == -1
+  })
+  console.log(totalBooks)
   return(
 
   <div>

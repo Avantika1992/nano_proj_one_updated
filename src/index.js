@@ -63,36 +63,45 @@ class Index extends React.Component{
        handleSelectionChanged(book,placeBook,event) {
          event.preventDefault()
          if(event.target.value==="currentlyReading"){
-           update(book,"currentlyReading").then((result) =>{
-           console.log(result)
-         })
+         update(book,"currentlyReading").then((result) =>{
+         console.log(result)
+       })
+     }
+         if(event.target.value==="wantToRead"){
+         update(book,"wantToRead").then((result) =>{
+         console.log(result)
+       })
+     }
+         if(event.target.value==="read"){
+         update(book,"read").then((result) =>{
+         console.log(result)
+       })
+     }
+         if(event.target.value==="None"){
+         update(book,"None").then((result) =>{
+         console.log(result)
+       })
+     }
+         event.preventDefault()
+         if(event.target.value==="currentlyReading"){
              book.shelf="currentlyReading"
              var a = this.state.currentlyReading
            	a.push(book)
               this.setState({currentlyReading: a});
          }
          if(event.target.value==="wantToRead"){
-           update(book,"wantToRead").then((result) =>{
-           console.log(result)
-         })
              book.shelf="wantToRead"
              var e = this.state.wantToRead
            	e.push(book)
                  this.setState({wantToRead: e});
          }
          if(event.target.value==="read"){
-           update(book,"read").then((result) =>{
-           console.log(result)
-         })
              book.shelf="read"
              var f = this.state.read
            	f.push(book)
              this.setState({read: f});
          }
           if(event.target.value==="None"){
-            update(book,"None").then((result) =>{
-            console.log(result)
-          })
               book.shelf="None"
               this.setState({availableBooks: this.state.availableBooks.push(book)});
          }
@@ -135,7 +144,36 @@ class Index extends React.Component{
        }
 
        handleSelectionSearch(bookSearch,event) {
-       event.preventDefault()
+         event.preventDefault()
+          if(this.state.currentlyReading){
+            for( var i = 0; i < this.state.currentlyReading.length; i++){
+            if ( this.state.currentlyReading[i].title === bookSearch.title) {
+              var a=this.state.currentlyReading
+              a.splice(i, 1)
+              this.setState({currentlyReading:a});
+
+           }
+         }
+       }
+         if(this.state.wantToRead){
+            for( var j = 0; j < this.state.wantToRead.length; j++){
+            if ( this.state.wantToRead[j].title === bookSearch.title) {
+            const b=this.state.wantToRead
+            b.splice(j, 1)
+            this.setState({wantToRead:b});
+           }
+         }
+       }
+         if(this.state.read){
+            for( var k = 0; k < this.state.read.length; k++){
+            if ( this.state.read[k].title === bookSearch.title) {
+            const c=this.state.read
+            c.splice(k, 1)
+            this.setState({read:c});
+           }
+         }
+       }
+
        if(event.target.value==="currentlyReading"){
          update(bookSearch,"currentlyReading").then((result) =>{
          console.log(result)
@@ -179,6 +217,8 @@ class Index extends React.Component{
 
 
   render(){
+    var currfilter=this.state.currentlyReading
+    console.log(currfilter)
     return (
       <div>
       <BrowserRouter>
